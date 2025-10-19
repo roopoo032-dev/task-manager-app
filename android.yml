@@ -1,0 +1,18 @@
+name: Build APK
+on: [push, workflow_dispatch]
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build Android APK
+      uses: uventura/python-android-build@v1
+      with:
+        requirements: "python3,kivy"
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: app-apk
+        path: bin/*.apk
